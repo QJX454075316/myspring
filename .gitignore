@@ -2,3 +2,6 @@
 .idea/workspace.xml
 target/
 
+/.idea/
+/target/
+/myspring.iml
