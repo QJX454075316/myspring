@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--测试ioc-->
+<beans>
+    <bean id="address" class="com.qjx.myspring.testbean.Address">
+        <property name="city" value="fuzhou"></property>
+    </bean>
+
+    <bean id="user" class="com.qjx.myspring.testbean.User">
+        <property name="userName" value="tom"></property>
+        <property name="address" ref="address"></property>
+    </bean>
+
+</beans>
