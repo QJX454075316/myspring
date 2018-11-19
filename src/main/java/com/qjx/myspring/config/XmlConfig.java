@@ -17,7 +17,7 @@ import java.util.Map;
 public class XmlConfig {
 
     public static Map<String,Bean> getConfig(String path) {
-        Map<String,Bean> configMap = new HashMap<>();
+        Map<String,Bean> configMap = new HashMap<>(16);
         Document doc = null;
         SAXReader  reader = new SAXReader();
         InputStream in = ClassLoader.getSystemResourceAsStream(path);

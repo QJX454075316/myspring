@@ -7,8 +7,6 @@ import com.qjx.myspring.config.Bean;
 import com.qjx.myspring.config.XmlConfig;
 import com.qjx.myspring.testbean.Address;
 import com.qjx.myspring.testbean.User;
-
-import java.io.File;
 import java.util.Map;
 
 public class Test {

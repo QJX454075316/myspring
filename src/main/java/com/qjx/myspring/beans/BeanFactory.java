@@ -6,6 +6,7 @@ package com.qjx.myspring.beans;
  */
 public interface BeanFactory {
     /**
+     * 根据名字获取对象
      * @param beanName
      * @return obj对象
      */
