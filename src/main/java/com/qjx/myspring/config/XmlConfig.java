@@ -38,11 +38,11 @@ public class XmlConfig {
                 bean.setClassName(className);
                 List<Element> propElems = element.elements("property");
                 if (propElems!=null){
-                    for (Element propelem:propElems){
+                    for (Element propElem:propElems){
                         Property  property = new Property();
-                        String propName = propelem.attributeValue("name");
-                        String value = propelem.attributeValue("value");
-                        String ref = propelem.attributeValue("ref");
+                        String propName = propElem.attributeValue("name");
+                        String value = propElem.attributeValue("value");
+                        String ref = propElem.attributeValue("ref");
                         property.setName(propName);
                         property.setValue(value);
                         property.setRef(ref);
