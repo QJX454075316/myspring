@@ -2,7 +2,7 @@ package com.qjx.myspring.testbean;
 
 /**
  * 测试代码
- * @author Administrator
+ * @author junxiangquan
  */
 public class User {
 

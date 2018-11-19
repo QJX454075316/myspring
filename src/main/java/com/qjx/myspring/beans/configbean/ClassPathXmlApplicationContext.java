@@ -4,14 +4,15 @@ import com.qjx.myspring.beans.BeanFactory;
 import com.qjx.myspring.config.Bean;
 import com.qjx.myspring.config.Property;
 import com.qjx.myspring.config.XmlConfig;
-
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
 /**
  * xml配置beans
- * @author Administrator
+ * @author junxiangquan
+ * @date 2018-11-19
  */
 public class ClassPathXmlApplicationContext implements BeanFactory {
 
@@ -57,14 +58,41 @@ public class ClassPathXmlApplicationContext implements BeanFactory {
         }
         if (bean.getProperties()!=null){
             for(Property property:bean.getProperties()){
-
+                String name = property.getName();
+                String ref = property.getRef();
+                String value = property.getValue();
+                if(value != null){
+                    Method method = BeanUtils.getSetterMethod(o,property.getName());
+                    try {
+                        method.invoke(o,property.getValue());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        throw new RuntimeException("属性名称不合法或者没有相应的getter方法："+property.getName());
+                    }
+                }
+                if(property.getRef() != null){
+                    //获取属性对应的setter方法
+                    Method getMethod = BeanUtils.getSetterMethod(o,property.getName());
+                    //从容器中找到依赖的对象
+                    Object obj = ioc.get(property.getRef());
+                    if(obj == null){
+                        throw new RuntimeException("没有找到依赖的对象："+property.getRef());
+                    }else{
+                        //调用set方法注入
+                        try {
+                            getMethod.invoke(o, obj);
+                        } catch (Exception e) {
+                            throw new RuntimeException("属性名称不合法或者没有相应的getter方法："+property.getName());
+                        }
+                    }
+                }
             }
         }
-        return null;
+        return o;
     }
 
     @Override
     public Object getBean(String beanName) {
-        return null;
+        return ioc.get(beanName);
     }
 }

@@ -20,7 +20,7 @@ public class XmlConfig {
         Map<String,Bean> configMap = new HashMap<>();
         Document doc = null;
         SAXReader  reader = new SAXReader();
-        InputStream in = XmlConfig.class.getResourceAsStream(path);
+        InputStream in = ClassLoader.getSystemResourceAsStream(path);
         try {
             doc = reader.read(in);
         }catch (DocumentException e) {
@@ -32,7 +32,7 @@ public class XmlConfig {
         if(list!=null){
             for (Element element:list){
                 Bean bean = new Bean();
-                String id = element.attributeValue("name");
+                String id = element.attributeValue("id");
                 String className = element.attributeValue("class");
                 bean.setId(id);
                 bean.setClassName(className);
