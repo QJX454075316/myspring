@@ -58,8 +58,6 @@ public class ClassPathXmlApplicationContext implements BeanFactory {
         }
         if (bean.getProperties()!=null){
             for(Property property:bean.getProperties()){
-                String name = property.getName();
-                String ref = property.getRef();
                 String value = property.getValue();
                 if(value != null){
                     Method method = BeanUtils.getSetterMethod(o,property.getName());
